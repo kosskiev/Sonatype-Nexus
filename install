@@ -12,7 +12,7 @@ curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compo
 chmod +x /usr/local/bin/docker-compose
 
 # Делаем тестовый запуск Nexus: (на 8081 порт)
-docker run -ti -p 8081:8081 sonatype/nexus3
+docker run -d -p 8081:8081 sonatype/nexus3
 
 # заходим на койнтейнер для получения пароляn
 docker ps
