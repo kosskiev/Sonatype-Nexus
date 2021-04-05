@@ -1,0 +1,27 @@
+# Nexus: установка, запуск, деплой в репозиторий
+
+# Обновляем систему, устанавливаем NGINX, и пока его стопаем:
+apt update && apt -y upgrade && apt -y install nginx
+service nginx stop
+
+# Устанавливаем Docker:
+curl https://get.docker.com/ | bash
+
+# И Docker Compose:
+curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+
+# Делаем тестовый запуск Nexus: (на 8081 порт)
+docker run -ti -p 8081:8081 sonatype/nexus3
+
+# заходим на койнтейнер для получения пароляn
+docker ps
+docker exec -it 0aa1c27ad4f0 bash
+cat /nexus-data/admin.password
+# пароль в таком формате 0b797b50-9b6d-4de2-a5e3-0a6ef8b22357
+
+# перезодим на ip адрес сервера или localhost и указанный порт (8081) логин admin пароль 0b797b50-9b6d-4de2-a5e3-0a6ef8b22357
+
+
+
+
