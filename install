@@ -27,7 +27,7 @@ ____________________________________________________________
 # на самом nexus при запуске открываем порты нужные в дальнейшем
 docker run -d -p 8081:8081 -p 8082:8082 -p 8083:8083 -p 8084:8084 sonatype/nexus3
 
-# в данном файле нужно прописать чтобы он не ругался на - server gave HTTP response to HTTPS client
+# в подключаемом докере (другой сервер)данном файле нужно прописать чтобы он не ругался на - server gave HTTP response to HTTPS client
 nano /etc/docker/daemon.json
 # прописываем в данном файле { "insecure-registries":["http://34.116.238.159:8082"] } 
 # перезагружаем
@@ -35,4 +35,13 @@ sudo /etc/init.d/docker restart
 
 # теперь логинимася
 docker login 34.116.238.159:8082
+
+# переназываем наш images(делаем копию и название другое)
+docker tag <imageId or imageName> <nexus-hostname>:<repository-port>/<image>:<tag>
+docker tag 1c2cec4067af 34.118.45.81:8082/next:v1
+
+# отправляю на nexus
+docker push <nexus-hostname>:<repository-port>/<image>:<tag>
+docker push 34.118.45.81:8082/next:v1
+
 
