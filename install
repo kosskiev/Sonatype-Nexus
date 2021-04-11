@@ -43,5 +43,19 @@ docker tag 1c2cec4067af 34.118.45.81:8082/next:v1
 # отправляю на nexus
 docker push <nexus-hostname>:<repository-port>/<image>:<tag>
 docker push 34.118.45.81:8082/next:v1
+______________________________________________________________
+# запустил через docker-compose https://gitlab.com/kosskiev/gitlab-ci-nexus
+# все скачал в рабочую директорию и запустил, если выдает ошибку 
+Error creating bundle cache.
+Unable to update instance pid: Unable to create directory /nexus-data/instances
+# нужно поменять права на папку 
+chmod 777 /data/nexus/volumes/nexus_data/
+# и перезапутить docker
+docker ps
+docker restart 6303e579b5c1
+
+
+
+
 
 
